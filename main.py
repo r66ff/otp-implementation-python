@@ -1,7 +1,6 @@
-import rand
+import random
 
 def random_gen():
-    import random
     r = random.randrange(33, 126)
     return r
 
@@ -29,7 +28,7 @@ def gen(l):
     c = 0
     k = []
     while (c < l):
-        k.append(rand.random_gen())
+        k.append(random_gen())
         c += 1
     write_to_file(k, 'keyfile.txt')
     return k
