@@ -1,8 +1,21 @@
-import random
+import sys, random, string
 
 def random_gen():
-    r = random.randrange(33, 126)
-    return r
+    # keysize = 5
+
+    # k=[]
+    # a=0
+    # while( a < keysize ):
+    k = random.SystemRandom()
+    k =k.choice(string.ascii_uppercase)
+    k = ord(k)
+
+        # keynew =keygen.choice(string.ascii_uppercase)
+        # k.append(keynew)
+        # a += 1
+    # print(''.join(k))
+
+    return k
 
 def get_input(n):
     inputfile = open(n, 'r')
@@ -38,6 +51,7 @@ def enc():
     mfilename = input('Enter name of the message file: ')
     message = get_input(mfilename)
     # Convert the text to ascii
+    # m = random_gen
     m = convert_to_ascii(message)
     # Get key length
     m_length = len(m)
@@ -45,7 +59,7 @@ def enc():
     key = gen(m_length)
     # Generate cypher text
     c = [a^b for a,b in zip(m,key)]
-    c = [el + 32 if el < 33 else el for el in c]
+    #c = [el + 64 if el < 65 else el for el in c]
     # Write the cypher text into cyphertext.txt
     write_to_file(c,'cyphertext.txt')
     return c
