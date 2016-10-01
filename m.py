@@ -1,16 +1,4 @@
-import sys, string
-# import random
-import os
-
-# def random_gen():
-#     k = random.SystemRandom()
-#     k =k.choice(string.ascii_uppercase)
-#     k = ord(k)
-#     return k
-
-def random_gen():
-    k = os.urandom(1)
-    return k
+import sys, string, os
 
 def get_input(n):
     inputfile = open(n, 'r')
@@ -18,35 +6,35 @@ def get_input(n):
     filecontents = list(filecontents.strip())
     return filecontents
 
-def convert_to_ascii(arr):
+def convert_str_to_int(m):
     c = []
-    for a in arr:
-        c.append(a.encode())
+    for a in m:
+        c.append(ord(a))
     return c
 
+def convert_byte_to_int(k):
+    c = []
+    for g in k:
+        c.append(int.from_bytes(g, byteorder='big', signed=False))
+    return c
 
 def write_to_file(t,n):
     f = open(n, 'w')
-    k = []
     for c in t:
-        k.append(chr(c).encode('utf-8'))
-    f.write(''.join(k))
-    # print(k)
+        f.write('%s, ' % str(c))
 
 def write_to_file_b(t,n):
     f = open(n, 'wb')
-    # k = []
     for c in t:
-        # k.append(str(chr(c)))
         f.write(c)
 
 def gen(l):
     c = 0
     k = []
     while (c < l):
-        k.append(random_gen())
+        k.append(os.urandom(1))
         c += 1
-    write_to_file_b(k, 'keyfile.txt')
+    write_to_file_b(k, 'k.txt')
     return k
 
 def enc():
@@ -54,17 +42,17 @@ def enc():
     mfilename = input('Enter name of the message file: ')
     message = get_input(mfilename)
     # Convert the text to ascii
-    # m = message
-    # m = convert_to_ascii(message)
+    m = convert_str_to_int(message)
     # Get key length
     m_length = len(m)
     # Generate key and write it to file keyfile.txt
     key = gen(m_length)
+    # Covert the key into integers
+    k = convert_byte_to_int(key)
     # Generate cypher text
-    c = [a^b for a,b in zip(m,key)]
-    # print(c)
-    # Write the cypher text into cyphertext.txt
-    write_to_file(c,'cyphertext.txt')
+    c = [a^b for a,b in zip(m,k)]
+    # Write the cypher text into c.txt
+    write_to_file(c,'c.txt')
     return c
 
 def dec():
@@ -72,15 +60,15 @@ def dec():
     cfilename = input('Enter name of the cypher file: ')
     cypher = get_input(cfilename)
     # Convert the cypher text to ascii
-    c = convert_to_ascii(cypher)
+    c = convert_str_to_int(cypher)
     # Get the key text
-    key = get_input('keyfile.txt')
+    key = get_input('k.txt')
     # Convert the key text to ascii
-    k = convert_to_ascii(key)
+    k = convert_byte_to_int(key)
     # Generate plain text
     pt = [a^b for a,b in zip(c,k)]
     # Write the plain text into plaintext.txt
-    write_to_file(pt,'plaintext.txt')
+    write_to_file(pt,'p.txt')
     return pt
 
 def main():
