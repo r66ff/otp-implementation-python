@@ -2,7 +2,7 @@ import sys, random, string
 
 def random_gen():
     k = random.SystemRandom()
-    k =k.choice(string.ascii_uppercase)
+    k =k.choice(string.printable)
     k = ord(k)
     return k
 
