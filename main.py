@@ -18,7 +18,6 @@ def convert_to_ascii(arr):
         c.append(ord(a))
     return c
 
-
 def write_to_file(t,n):
     f = open(n, 'w')
     k = []
@@ -53,7 +52,7 @@ def enc():
 
 def dec():
     # Get cypher text
-    cfilename = input('Enter name of the cypher file: ')
+    cfilename = input('Enter name of the cipher file: ')
     cypher = get_input(cfilename)
     # Convert the cypher text to ascii
     c = convert_to_ascii(cypher)
@@ -74,8 +73,9 @@ def main():
         print('Encrypted! Your key is stored in keyfile.txt and cypher is in cyphertext.txt')
     elif operation == 'dec':
         dec()
-        print('Decripted! Your message is stored in plaintext.txt')
+        print('Decrypted! Your message is stored in plaintext.txt')
     else:
         input('Error, try again')
 
 main()
+#finally, dammit
