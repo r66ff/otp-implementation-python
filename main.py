@@ -1,7 +1,7 @@
 import sys, random, string
 
 def random_gen():
-    k = random.SystemRandom()
+    k = secrets.SystemRandom()
     k =k.choice(string.printable)
     k = ord(k)
     return k
