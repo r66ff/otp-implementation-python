@@ -1,4 +1,4 @@
-import sys, random, string
+import sys, secrets, string
 
 def random_gen():
     k = secrets.SystemRandom()
