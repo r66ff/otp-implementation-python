@@ -78,4 +78,3 @@ def main():
         input('Error, try again')
 
 main()
-#finally, dammit
